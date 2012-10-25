@@ -26,8 +26,11 @@ hack_init(void)
 
 	h = dlopen("libX11.so", RTLD_LAZY);
 	if (h == NULL) {
-		fprintf(stderr, "Unable to open libX11\n");
-		_exit(1);
+		h = dlopen("libX11.so.6", RTLD_LAZY);
+		if (h == NULL) {
+			fprintf(stderr, "Unable to open libX11\n");
+			_exit(1);
+		}
 	}
 
 	real_XNextEvent = dlsym(h, "XNextEvent");
@@ -82,21 +85,96 @@ XNextEvent(Display *display, XEvent *event)
 		/* mangle keycodes */
 		keysym = sym_XKeycodeToKeysym(display, keyevent->keycode, 0);
 		switch (keysym) {
-		case XK_Up:
-			keyevent->keycode = 98;
-			break;
-		case XK_Down:
-			keyevent->keycode = 104;
-			break;
-		case XK_Left:
-			keyevent->keycode = 100;
-			break;
-		case XK_Right:
-			keyevent->keycode = 102;
-			break;
-		case XK_Print:
-			keyevent->keycode = 111;
-			break;
+		  /* Modifiers */
+		  case XK_Shift_R: keyevent->keycode = 62; break;
+		  case XK_Shift_L: keyevent->keycode = 50; break;
+		  case XK_Control_L: keyevent->keycode = 37; break;
+		  case XK_Alt_L: keyevent->keycode = 64; break;
+		  case XK_Alt_R: keyevent->keycode = 108; break;
+		  case XK_Super_R: keyevent->keycode = 143; break;
+		  case XK_Caps_Lock: keyevent->keycode = 66; break;
+
+		  /* top row - function keys */
+		  case XK_Escape: keyevent->keycode = 9; break;
+		  case XK_F1: keyevent->keycode = 67; break;
+		  case XK_F2: keyevent->keycode = 68; break;
+		  case XK_F3: keyevent->keycode = 69; break;
+		  case XK_F4: keyevent->keycode = 70; break;
+		  case XK_F5: keyevent->keycode = 71; break;
+		  case XK_F6: keyevent->keycode = 72; break;
+		  case XK_F7: keyevent->keycode = 73; break;
+		  case XK_F8: keyevent->keycode = 74; break;
+		  case XK_F9: keyevent->keycode = 75; break;
+		  case XK_F10: keyevent->keycode = 76; break;
+		  case XK_F11: keyevent->keycode = 95; break;
+		  case XK_F12: keyevent->keycode = 96; break;
+
+		  /* Second row: numeric keys, 12345 */
+		  case XK_grave: keyevent->keycode = 49; break;
+		  case XK_1: keyevent->keycode = 10; break;
+		  case XK_2: keyevent->keycode = 11; break;
+		  case XK_3: keyevent->keycode = 12; break;
+		  case XK_4: keyevent->keycode = 13; break;
+		  case XK_5: keyevent->keycode = 14; break;
+		  case XK_6: keyevent->keycode = 15; break;
+		  case XK_7: keyevent->keycode = 16; break;
+		  case XK_8: keyevent->keycode = 17; break;
+		  case XK_9: keyevent->keycode = 18; break;
+		  case XK_0: keyevent->keycode = 19; break;
+		  case XK_minus: keyevent->keycode = 20; break;
+		  case XK_equal: keyevent->keycode = 21; break;
+		  case XK_BackSpace: keyevent->keycode = 22; break;
+
+		  /* Third row: qwerty */
+		  case XK_Tab: keyevent->keycode = 23; break;
+		  case XK_q: keyevent->keycode = 24; break;
+		  case XK_w: keyevent->keycode = 25; break;
+		  case XK_e: keyevent->keycode = 26; break;
+		  case XK_r: keyevent->keycode = 27; break;
+		  case XK_t: keyevent->keycode = 28; break;
+		  case XK_y: keyevent->keycode = 29; break;
+		  case XK_u: keyevent->keycode = 30; break;
+		  case XK_i: keyevent->keycode = 31; break;
+		  case XK_o: keyevent->keycode = 32; break;
+		  case XK_p: keyevent->keycode = 33; break;
+		  case XK_bracketleft: keyevent->keycode = 34; break;
+		  case XK_bracketright: keyevent->keycode = 35; break;
+		  case XK_backslash: keyevent->keycode = 51; break;
+
+		  /* Fourth row: asdf */
+		  case XK_a: keyevent->keycode = 38; break;
+		  case XK_s: keyevent->keycode = 39; break;
+		  case XK_d: keyevent->keycode = 40; break;
+		  case XK_f: keyevent->keycode = 41; break;
+		  case XK_g: keyevent->keycode = 42; break;
+		  case XK_h: keyevent->keycode = 43; break;
+		  case XK_j: keyevent->keycode = 44; break;
+		  case XK_k: keyevent->keycode = 45; break;
+		  case XK_l: keyevent->keycode = 46; break;
+		  case XK_semicolon: keyevent->keycode = 47; break;
+		  case XK_apostrophe: keyevent->keycode = 48; break;
+		  case XK_Return: keyevent->keycode = 36; break;
+
+		  /* Fifth row: zxcv */
+		  case XK_z: keyevent->keycode = 52; break;
+		  case XK_x: keyevent->keycode = 53; break;
+		  case XK_c: keyevent->keycode = 54; break;
+		  case XK_v: keyevent->keycode = 55; break;
+		  case XK_b: keyevent->keycode = 56; break;
+		  case XK_n: keyevent->keycode = 57; break;
+		  case XK_m: keyevent->keycode = 58; break;
+		  case XK_comma: keyevent->keycode = 59; break;
+		  case XK_period: keyevent->keycode = 60; break;
+		  case XK_slash: keyevent->keycode = 61; break;
+
+		  case XK_space: keyevent->keycode = 65; break;
+
+		  /* Arrow keys */
+		  case XK_Up: keyevent->keycode = 98; break;
+		  case XK_Left: keyevent->keycode = 100; break;
+		  case XK_Right: keyevent->keycode = 102; break;
+		  case XK_Down: keyevent->keycode = 104; break;
+
 		}
 	}
 
