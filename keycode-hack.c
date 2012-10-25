@@ -89,10 +89,39 @@ XNextEvent(Display *display, XEvent *event)
 		  case XK_Shift_R: keyevent->keycode = 62; break;
 		  case XK_Shift_L: keyevent->keycode = 50; break;
 		  case XK_Control_L: keyevent->keycode = 37; break;
+		  case XK_Control_R: keyevent->keycode = 105; break;
 		  case XK_Alt_L: keyevent->keycode = 64; break;
 		  case XK_Alt_R: keyevent->keycode = 108; break;
 		  case XK_Super_R: keyevent->keycode = 143; break;
 		  case XK_Caps_Lock: keyevent->keycode = 66; break;
+		  case XK_Num_Lock: keyevent->keycode = 77; break;
+
+		  /* Extended keyboard navigation keys */
+		  case XK_Home: keyevent->keycode = 110; break;
+		  case XK_End: keyevent->keycode = 115; break;
+		  case XK_Prior: keyevent->keycode = 112; break;
+		  case XK_Next: keyevent->keycode = 117; break;
+		  case XK_Delete: keyevent->keycode = 119; break;
+
+		  /* Numeric keypad keys */
+		  case XK_KP_Equal: keyevent->keycode = 125; break;
+		  case XK_KP_Divide: keyevent->keycode = 106; break;
+		  case XK_KP_Multiply: keyevent->keycode = 63; break;
+		  case XK_KP_Subtract: keyevent->keycode = 82; break;
+		  case XK_KP_Add: keyevent->keycode = 86; break;
+		  case XK_KP_Enter: keyevent->keycode = 104; break;
+		  case XK_KP_Decimal: keyevent->keycode = 91; break;
+		  case XK_KP_0: keyevent->keycode = 90; break;
+		  case XK_KP_1: keyevent->keycode = 87; break;
+		  case XK_KP_2: keyevent->keycode = 88; break;
+		  case XK_KP_3: keyevent->keycode = 89; break;
+		  case XK_KP_4: keyevent->keycode = 83; break;
+		  case XK_KP_5: keyevent->keycode = 84; break;
+		  case XK_KP_6: keyevent->keycode = 85; break;
+		  case XK_KP_7: keyevent->keycode = 79; break;
+		  case XK_KP_8: keyevent->keycode = 80; break;
+		  case XK_KP_9: keyevent->keycode = 81; break;
+
 
 		  /* top row - function keys */
 		  case XK_Escape: keyevent->keycode = 9; break;
