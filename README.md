@@ -23,16 +23,19 @@ keycodes. You then use it via `LD_PRELOAD`.
 # How to build and install
 
     make
-    
     make install
 
-This requires no special privileges, as it installs to your homedir (`~/local/lib/`)
+This requires no special privileges, as it installs to your homedir
+(`~/local/lib/`).  A wrapper executable is installed to a bin directory in your
+`$PATH` to intercept calls to javaws and perform the `LD_PRELOAD` hack. You may
+need to add one yourself (`~/bin/` is a reasonable suggestion).
 
 
 # How to use
 
 Nothing extra, it should Just Work the next time you launch a remote DRAC
-console.
+console. If not, direct your browser to open the `viewer.jnlp` file with the
+executable wrapper.
 
 
 ## Using SysRq
@@ -42,3 +45,11 @@ your local workstation, lest you get a bit of a surprise...
 
 `cat /proc/sys/kernel/sysrq` and set it to 0 if it's not already.
 
+
+## Additional keysym mapping
+
+A large set of keysyms were merged into the mapping in commit c3f916c. If you
+find the hack isn't working as expected, you may need to revert to an earlier
+commit, possibly 8f11599. The functionality is dependent on both the local
+system and the app served up by the iDRAC, so it's hard to provide definite
+predictions. Good luck!
