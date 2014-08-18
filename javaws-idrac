@@ -4,10 +4,19 @@
 
 HACK=$HOME/local/lib/keycode-hack.so
 
+# check for existence of icedtea-web
+JAVAWS=$(which javaws)
+if test -z "${JAVAWS}" ; then
+	JAVAWS=$(which javaws.itweb)
+	if test -z "${JAVAWS}" ; then
+		echo "ERROR: cannot find a suitable javaws" 1>&2
+	fi
+fi
+
 if [ ! -f $HACK ]
 then
 	echo "ERROR: $HACK not available" 1>&2
 	exit 1
 fi
 
-LD_PRELOAD=$HACK exec /usr/bin/javaws "$@"
+LD_PRELOAD=$HACK exec ${JAVAWS} "$@"
