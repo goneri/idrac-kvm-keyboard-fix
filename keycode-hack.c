@@ -199,10 +199,10 @@ XNextEvent(Display *display, XEvent *event)
 		  case XK_space: keyevent->keycode = 65; break;
 
 		  /* Arrow keys */
-		  case XK_Up: keyevent->keycode = 98; break;
-		  case XK_Left: keyevent->keycode = 100; break;
-		  case XK_Right: keyevent->keycode = 102; break;
-		  case XK_Down: keyevent->keycode = 104; break;
+		  case XK_Up: keyevent->keycode = 111; break;
+		  case XK_Left: keyevent->keycode = 113; break;
+		  case XK_Right: keyevent->keycode = 114; break;
+		  case XK_Down: keyevent->keycode = 116; break;
 
 		}
 	}
